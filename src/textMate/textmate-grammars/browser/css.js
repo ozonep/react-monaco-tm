@@ -40,15 +40,15 @@ export class CssContribution {
                 }
             }
         });
-        const grammar = require('../data/css.json.tmLanguage');
-        registry.registerTextmateGrammarScope(this.scopeName, {
-            async getGrammarDefinition() {
-                return {
-                    format: 'json',
-                    content: grammar
-                };
-            }
-        });
+        // const grammar = require('../data/css.json.tmLanguage');
+        // registry.registerTextmateGrammarScope(this.scopeName, {
+        //     async getGrammarDefinition() {
+        //         return {
+        //             format: 'json',
+        //             content: grammar
+        //         };
+        //     }
+        // });
         registry.mapLanguageIdToTextmateGrammar(this.id, this.scopeName);
     }
 }

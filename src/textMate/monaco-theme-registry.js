@@ -81,12 +81,12 @@ export class MonacoThemeRegistry {
 }
 
 
-export const SINGLETON = new MonacoThemeRegistry();
-export const DARK_DEFAULT_THEME = SINGLETON.register(require('../../../data/monaco-themes/vscode/dark_plus.json'), {
-    './dark_defaults.json': require('../../../data/monaco-themes/vscode/dark_defaults.json'),
-    './dark_vs.json': require('../../../data/monaco-themes/vscode/dark_vs.json')
-}, 'dark-plus', 'vs-dark').name;
-export const DARK_SCICODE_THEME = SINGLETON.register(require('../../../data/monaco-themes/vscode/dark_plus.json'), {
-    './dark_defaults.json': require('../../../data/monaco-themes/vscode/dark_defaults.json'),
-    './dark_vs.json': require('../../../data/monaco-themes/vscode/dark_vs.json')
-}, 'one-dark', 'vs-dark').name;
+// export const SINGLETON = new MonacoThemeRegistry();
+// export const DARK_DEFAULT_THEME = SINGLETON.register(require('../../../data/monaco-themes/vscode/dark_plus.json'), {
+//     './dark_defaults.json': require('../../../data/monaco-themes/vscode/dark_defaults.json'),
+//     './dark_vs.json': require('../../../data/monaco-themes/vscode/dark_vs.json')
+// }, 'dark-plus', 'vs-dark').name;
+// export const DARK_SCICODE_THEME = SINGLETON.register(require('../../../data/monaco-themes/vscode/dark_plus.json'), {
+//     './dark_defaults.json': require('../../../data/monaco-themes/vscode/dark_defaults.json'),
+//     './dark_vs.json': require('../../../data/monaco-themes/vscode/dark_vs.json')
+// }, 'one-dark', 'vs-dark').name;

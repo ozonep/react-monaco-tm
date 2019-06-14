@@ -1,6 +1,6 @@
 'use strict';
 import { parseRawGrammar } from 'vscode-textmate';
-const fs = require("fs");
+// const fs = require("fs");
 
 export class Resolver {
     constructor(languages, onigLibPromise, onigLibName) {
@@ -36,15 +36,15 @@ export class Resolver {
         return g;
     }
 }
-function readGrammarFromPath(path) {
-    return new Promise((c, e) => {
-        fs.readFile(path, (error, content) => {
-            if (error) {
-                e(error);
-            }
-            else {
-                c(parseRawGrammar(content.toString(), path));
-            }
-        });
-    });
-}
+// function readGrammarFromPath(path) {
+//     return new Promise((c, e) => {
+//         fs.readFile(path, (error, content) => {
+//             if (error) {
+//                 e(error);
+//             }
+//             else {
+//                 c(parseRawGrammar(content.toString(), path));
+//             }
+//         });
+//     });
+// }

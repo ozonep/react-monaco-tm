@@ -47,25 +47,25 @@ export class PythonContribution {
 
         monaco.languages.setLanguageConfiguration(this.id, this.config);
 
-        const platformGrammar = require('../../data/MagicPython.tmLanguage.json');
-        registry.registerTextmateGrammarScope('source.python', {
-            async getGrammarDefinition() {
-                return {
-                    format: 'json',
-                    content: platformGrammar
-                };
-            }
-        });
+        // const platformGrammar = require('../../data/MagicPython.tmLanguage.json');
+        // registry.registerTextmateGrammarScope('source.python', {
+        //     async getGrammarDefinition() {
+        //         return {
+        //             format: 'json',
+        //             content: platformGrammar
+        //         };
+        //     }
+        // });
 
-        const cGrammar = require('../data/MagicRegExp.tmLanguage.json');
-        registry.registerTextmateGrammarScope('source.regexp.python', {
-            async getGrammarDefinition() {
-                return {
-                    format: 'json',
-                    content: cGrammar
-                };
-            }
-        });
+        // const cGrammar = require('../data/MagicRegExp.tmLanguage.json');
+        // registry.registerTextmateGrammarScope('source.regexp.python', {
+        //     async getGrammarDefinition() {
+        //         return {
+        //             format: 'json',
+        //             content: cGrammar
+        //         };
+        //     }
+        // });
         registry.mapLanguageIdToTextmateGrammar(this.id, 'source.python');
     }
 }

@@ -57,15 +57,15 @@ export class HtmlContribution {
             }
         });
 
-        const grammar = require('../data/html.json.tmLanguage');
-        registry.registerTextmateGrammarScope(this.scopeName, {
-            async getGrammarDefinition() {
-                return {
-                    format: 'json',
-                    content: grammar
-                };
-            }
-        });
+        // const grammar = require('../data/html.json.tmLanguage');
+        // registry.registerTextmateGrammarScope(this.scopeName, {
+        //     async getGrammarDefinition() {
+        //         return {
+        //             format: 'json',
+        //             content: grammar
+        //         };
+        //     }
+        // });
         registry.mapLanguageIdToTextmateGrammar(this.id, this.scopeName);
     }
 }

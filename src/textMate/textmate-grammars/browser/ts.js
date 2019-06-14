@@ -4,15 +4,15 @@ export class TypescriptContribution {
 
     registerTextmateLanguage(registry) {
         this.registerTypeScript();
-        const grammar = require('../data/typescript.json.tmlanguage');
-        registry.registerTextmateGrammarScope('source.ts', {
-            async getGrammarDefinition() {
-                return {
-                    format: 'json',
-                    content: grammar,
-                };
-            }
-        });
+        // const grammar = require('../data/typescript.json.tmlanguage');
+        // registry.registerTextmateGrammarScope('source.ts', {
+        //     async getGrammarDefinition() {
+        //         return {
+        //             format: 'json',
+        //             content: grammar,
+        //         };
+        //     }
+        // });
 
         registry.mapLanguageIdToTextmateGrammar(this.ts_id, 'source.ts');
         registry.registerGrammarConfiguration(this.ts_id, {

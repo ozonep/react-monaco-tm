@@ -6,15 +6,15 @@ export class JavascriptContribution {
 
     registerTextmateLanguage(registry) {
         this.registerJavaScript();
-        const grammar = require('../data/javascript.tmlanguage.json');
-        registry.registerTextmateGrammarScope('source.js', {
-            async getGrammarDefinition() {
-                return {
-                    format: 'json',
-                    content: grammar,
-                };
-            }
-        });
+        // const grammar = require('../data/javascript.tmlanguage.json');
+        // registry.registerTextmateGrammarScope('source.js', {
+        //     async getGrammarDefinition() {
+        //         return {
+        //             format: 'json',
+        //             content: grammar,
+        //         };
+        //     }
+        // });
         registry.registerGrammarConfiguration(this.js_id, {
             embeddedLanguages: {
                 'meta.tag.js': getEncodedLanguageId('jsx-tags'),
@@ -32,15 +32,15 @@ export class JavascriptContribution {
 
         registry.mapLanguageIdToTextmateGrammar(this.js_id, 'source.js');
 
-        const jsxGrammar = require('../data/javascript.jsx.tmlanguage.json');
-        registry.registerTextmateGrammarScope('source.jsx', {
-            async getGrammarDefinition() {
-                return {
-                    format: 'json',
-                    content: jsxGrammar,
-                };
-            }
-        });
+        // const jsxGrammar = require('../data/javascript.jsx.tmlanguage.json');
+        // registry.registerTextmateGrammarScope('source.jsx', {
+        //     async getGrammarDefinition() {
+        //         return {
+        //             format: 'json',
+        //             content: jsxGrammar,
+        //         };
+        //     }
+        // });
 
         registry.mapLanguageIdToTextmateGrammar(this.js_react_id, 'source.jsx');
     }

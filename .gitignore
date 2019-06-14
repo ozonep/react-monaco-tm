@@ -104,3 +104,4 @@ Temporary Items
 !.vscode/launch.json
 !.vscode/extensions.json
 node_modules/
+lib/

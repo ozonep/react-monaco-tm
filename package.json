@@ -1,6 +1,6 @@
 {
   "name": "react-monaco-tm",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "description": "React bindings for Monaco with Textmate grammar",
   "main": "lib/index.js",
   "module": "lib/index",

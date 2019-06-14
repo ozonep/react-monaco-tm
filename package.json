@@ -1,0 +1,58 @@
+{
+  "name": "react-monaco-tm",
+  "version": "0.0.1",
+  "description": "React bindings for Monaco with Textmate grammar",
+  "main": "lib/index.js",
+  "module": "lib/index",
+  "jsnext:main": "src/index.js",
+  "scripts": {
+    "build": "babel src --out-dir lib",
+    "clean": "rimraf lib",
+    "prepublishOnly": "yarn build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ozonep/react-monaco-tm.git"
+  },
+  "keywords": [
+    "textmate",
+    "monaco",
+    "react",
+    "hooks"
+  ],
+  "author": "Ivan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ozonep/react-monaco-tm/issues"
+  },
+  "homepage": "https://github.com/ozonep/react-monaco-tm#readme",
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel-eslint": "^10.0.1",
+    "babel-loader": "^8.0.6",
+    "cross-env": "^5.2.0",
+    "css-loader": "^3.0.0",
+    "del-cli": "^2.0.0",
+    "eslint": "^5.16.0",
+    "mini-css-extract-plugin": "^0.7.0",
+    "babel-cli": "^6.26.0",
+    "babel-env": "^2.4.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "idb-keyval": "^3.2.0",
+    "react": "^16.8.6",
+    "rimraf": "^2.6.3"
+  },
+  "peerDependencies": {
+    "react": "^16.x"
+  },
+  "dependencies": {
+    "monaco-editor-no-lang": "^1.18.0",
+    "prop-types": "^15.7.2",
+    "onigasm": "^2.2.2",
+    "onigasm-umd": "^2.2.2"
+  }
+}

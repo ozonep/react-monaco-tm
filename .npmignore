@@ -1,0 +1,8 @@
+/examples/
+/example/
+.babelrc
+.eslintrc
+.eslintignore
+.gitignore
+.npmignore
+/.idea/

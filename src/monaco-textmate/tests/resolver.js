@@ -70,6 +70,7 @@ export class Resolver {
 
 async function readGrammarFromPath(path) {
     console.log('THIS IS PATH', path);
-    let content =  await (await fetch(path)).text();
+    let content = await require(`../../${path}`);
+    // let content =  await (await fetch(path)).text();
     return parseJSONGrammar(content.toString());
 }

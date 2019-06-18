@@ -2,12 +2,12 @@ export const grammars = [
   {
     "language": "css",
     "scopeName": "source.css",
-    "path": "/grammars/css.json.tmLanguage"
+    "path": "grammars/tmGrammars/css.json"
   },
   {
     "language": "html",
     "scopeName": "text.html.basic",
-    "path": "/grammars/html.json.tmLanguage",
+    "path": "grammars/tmGrammars/html.json",
     "embeddedLanguages": {
       "text.html": "html",
       "source.css": "css",
@@ -18,27 +18,27 @@ export const grammars = [
   {
     "language": "javascript",
     "scopeName": "source.js",
-    "path": "/grammars/javaScript.json.tmLanguage"
+    "path": "grammars/tmGrammars/javascript.json"
   },
   {
     "language": "json",
     "scopeName": "source.json",
-    "path": "/grammars/json.json.tmLanguage"
+    "path": "grammars/tmGrammars/json.json"
   },
   {
     "language": "python",
     "scopeName": "source.python",
-    "path": "/grammars/python.json.tmLanguage"
+    "path": "grammars/tmGrammars/python.json"
   },
   {
     "language": "typescript",
     "scopeName": "source.ts",
-    "path": "/grammars/typescript.tmLanguage.json"
+    "path": "grammars/tmGrammars/typescript.json"
   },
   {
     "language": "typescriptreact",
     "scopeName": "source.tsx",
-    "path": "/grammars/typescript.tmLanguage.json"
+    "path": "grammars/tmGrammars/typescript.json"
   }
 ];
 

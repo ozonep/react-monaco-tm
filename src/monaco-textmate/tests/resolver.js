@@ -1,6 +1,6 @@
 'use strict';
 import Filer from 'filer';
-import { parseJSONGrammar } from '../main';
+
 let path = Filer.Path;
 
 export class Resolver {
@@ -59,18 +59,11 @@ export class Resolver {
             let grammar = this._grammars[i];
             if (grammar.scopeName === scopeName) {
                 if (!grammar.grammar) {
-                    grammar.grammar = readGrammarFromPath(grammar.path);
+                    grammar.grammar = require(`../../${grammar.path}`);
                 }
                 return grammar.grammar;
             }
         }
         return null;
     }
-}
-
-async function readGrammarFromPath(path) {
-    console.log('THIS IS PATH', path);
-    let content = await require(`../../${path}`);
-    // let content =  await (await fetch(path)).text();
-    return parseJSONGrammar(content.toString());
 }

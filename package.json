@@ -1,6 +1,6 @@
 {
   "name": "react-monaco-tm",
-  "version": "0.0.6",
+  "version": "0.0.17",
   "description": "React bindings for Monaco with Textmate grammar",
   "main": "lib/index.js",
   "module": "lib/index",
@@ -52,7 +52,7 @@
   "dependencies": {
     "monaco-editor-no-lang": "^1.18.0",
     "onigasm": "^2.2.2",
-    "onigasm-umd": "^2.2.2",
-    "prop-types": "^15.7.2"
+    "prop-types": "^15.7.2",
+    "filer": "^1.1.2"
   }
 }

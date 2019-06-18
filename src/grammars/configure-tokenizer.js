@@ -3,7 +3,7 @@ import {Resolver} from "../monaco-textmate/tests/resolver";
 import {grammars, languages} from '../monaco-textmate/grammars';
 import {getOnigasm} from "../monaco-textmate/onigLibs";
 import {Registry} from "../monaco-textmate/main";
-import {TextmateRegistry} from "../textMate/textmate-registry";
+// import {TextmateRegistry} from "../textMate/textmate-registry";
 
 let languagesToRegister = [
   ["css", "source.css"],

@@ -2,11 +2,7 @@
 import { SyncRegistry } from './registry';
 import { Theme } from './theme';
 import { StackElement } from './grammar';
-import JSON5 from "json5";
 
-export function parseJSONGrammar(contents) {
-    return JSON5.parse(contents);
-}
 
 export class Registry {
     constructor(locator = { loadGrammar: () => null }) {

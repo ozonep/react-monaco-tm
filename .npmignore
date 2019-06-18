@@ -1,4 +1,3 @@
-/examples/
 /example/
 .babelrc
 .eslintrc
@@ -6,3 +5,8 @@
 .gitignore
 .npmignore
 /.idea/
+/src/
+#/src/textMate/
+/lib/textMate/
+/lib/shikii/
+#/src/grammars/tmGrammars

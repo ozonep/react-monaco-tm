@@ -3,6 +3,14 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/.tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/lib" />
+      <excludeFolder url="file://$MODULE_DIR$/lib/grammars" />
+      <excludeFolder url="file://$MODULE_DIR$/lib/grammars/tmGrammars" />
+      <excludeFolder url="file://$MODULE_DIR$/lib/monaco-textmate" />
+      <excludeFolder url="file://$MODULE_DIR$/lib/shikii" />
+      <excludeFolder url="file://$MODULE_DIR$/lib/textMate" />
+      <excludeFolder url="file://$MODULE_DIR$/lib/themes" />
+      <excludeFolder url="file://$MODULE_DIR$/lib/workers" />
       <excludeFolder url="file://$MODULE_DIR$/temp" />
       <excludeFolder url="file://$MODULE_DIR$/tmp" />
     </content>

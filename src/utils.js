@@ -7,4 +7,4 @@ export const debounce = (fn, time) => {
     }
 };
 
-// export const processSize = size => (/^\d+$/.test(size) ? `${size}px` : size);
+export const processSize = size => (/^\d+$/.test(size) ? `${size}px` : size);

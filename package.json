@@ -1,14 +1,11 @@
 {
   "name": "react-monaco-tm",
-  "version": "0.0.21",
+  "version": "0.1.0",
   "description": "React bindings for Monaco with Textmate grammar",
   "main": "lib/index.js",
-  "module": "lib/index",
-  "jsnext:main": "src/index.js",
   "scripts": {
     "build": "babel src --out-dir lib",
-    "clean": "rimraf lib",
-    "prepublishOnly": "yarn build"
+    "clean": "rimraf lib"
   },
   "repository": {
     "type": "git",
@@ -29,22 +26,13 @@
   "devDependencies": {
     "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.5",
-    "@babel/plugin-proposal-class-properties": "^7.4.4",
-    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
-    "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",
-    "babel-env": "^2.4.1",
-    "babel-eslint": "^10.0.1",
-    "babel-loader": "^8.0.6",
-    "babel-preset-stage-0": "^6.24.1",
-    "cross-env": "^5.2.0",
-    "css-loader": "^3.0.0",
-    "del-cli": "^2.0.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "eslint": "^5.16.0",
     "idb-keyval": "^3.2.0",
-    "mini-css-extract-plugin": "^0.7.0",
     "react": "^16.8.6",
-    "rimraf": "^2.6.3"
+    "rimraf": "^2.6.3",
+    "babel-preset-modern-browsers": "^12.0.0-beta.1"
   },
   "peerDependencies": {
     "react": "^16.x"

@@ -15,24 +15,27 @@ export class TokenizerState {
 }
 
 export function wireTmGrammars(monaco, registry, grammars, langId, scope, editor) {
-    return Promise.all(
-        grammars.map(async gram => {
-            const grammar = await registry.loadGrammar(scope);
-            monaco.languages.setTokensProvider(langId, {
-                getInitialState: () => new TokenizerState(INITIAL),
-                tokenize: (line, state) => {
-                    const res = grammar.tokenizeLine(line, state.ruleStack);
-                    return {
-                        endState: new TokenizerState(res.ruleStack),
-                        tokens: res.tokens.map(token => ({
-                            ...token,
-                            scopes: TMToMonacoToken(editor, token.scopes),
-                        })),
-                    };
-                },
-            });
-        })
-    );
+    if (!langsInjected) {
+        langsInjected = true;
+        return Promise.all(
+            grammars.map(async gram => {
+                const grammar = await registry.loadGrammar(gram.scopeName);
+                monaco.languages.setTokensProvider(gram.language, {
+                    getInitialState: () => new TokenizerState(INITIAL),
+                    tokenize: (line, state) => {
+                        const res = grammar.tokenizeLine(line, state.ruleStack);
+                        return {
+                            endState: new TokenizerState(res.ruleStack),
+                            tokens: res.tokens.map(token => ({
+                                ...token,
+                                scopes: TMToMonacoToken(editor, token.scopes),
+                            })),
+                        };
+                    },
+                });
+            })
+        );
+    }
 }
 
 const TMToMonacoToken = (editor, scopes) => {

@@ -26,6 +26,5 @@ export async function liftOff(monaco, languageId, editor) {
   console.log('langId', langId);
   if (languageId === 'plaintext') langId = 'javascript';
   const [, scope] = languagesToRegister.find(([id]) => id === langId);
-  const oneGrammar = grammars.filter((grammar) => grammar.language === langId);
-  await wireTmGrammars(monaco, registry, oneGrammar, langId, scope, editor);
+  await wireTmGrammars(monaco, registry, grammars, langId, scope, editor);
 }

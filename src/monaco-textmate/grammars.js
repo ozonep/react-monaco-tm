@@ -34,11 +34,6 @@ export const grammars = [
     "language": "typescript",
     "scopeName": "source.ts",
     "path": "grammars/tmGrammars/typescript.json"
-  },
-  {
-    "language": "typescriptreact",
-    "scopeName": "source.tsx",
-    "path": "grammars/tmGrammars/typescript.json"
   }
 ];
 

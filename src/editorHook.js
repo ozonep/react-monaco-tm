@@ -1,5 +1,5 @@
 /* eslint-disable */
-import * as monaco from 'monaco-editor-no-lang/esm/vs/editor/editor.main';
+import * as monaco from 'monaco-editor-no-lang/esm/vs/editor/editor.api';
 import PropTypes from "prop-types";
 import React, {useEffect, useRef} from "react";
 import {processSize} from "./utils";
@@ -147,16 +147,6 @@ function MonacoEditor(props) {
         }
     };
 
-    subscription = editor && editor.onDidChangeModelContent(() => {
-        let model = editor.getModel();
-        if (model) {
-            const value = model.getValue();
-            if (value !== props.value) {
-                props.onChange(value, editor);
-            }
-        }
-    });
-
     const addTypings = ({typings}) => {
         Object.keys(typings).forEach(path => {
             let extraLib = extraLibs.get(path);
@@ -184,7 +174,17 @@ function MonacoEditor(props) {
     };
 
     useEffect(() => {
-        initMonaco();
+       initMonaco().then(() => {
+           subscription = editor.onDidChangeModelContent(() => {
+               let model = editor.getModel();
+               if (model) {
+                   const value = model.getValue();
+                   if (value !== props.value) {
+                       props.onChange(value, editor);
+                   }
+               }
+           });
+       });
         return () => destroyMonaco();
     }, []);
 

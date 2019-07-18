@@ -163,16 +163,6 @@ function MonacoEditor(props) {
         }
     };
 
-    subscription = editorRef.current && editorRef.current.onDidChangeModelContent(() => {
-        let model = editorRef.current.getModel();
-        if (model) {
-            const value = model.getValue();
-            if (value !== props.value) {
-                props.onChange(value, editorRef.current);
-            }
-        }
-    });
-
     const addTypings = ({typings}) => {
         Object.keys(typings).forEach(path => {
             let extraLib = extraLibs.get(path);
@@ -216,7 +206,7 @@ function MonacoEditor(props) {
                     subscription = editorRef.current && editorRef.current.onKeyUp(() => {
                         let model = editorRef.current.getModel();
                         let uriPath = model.uri.path;
-                        if (model) {
+                        if (model && uriPath) {
                             const value = model.getValue();
                             if (value !== props.value) {
                                 props.onChange(value, uriPath);

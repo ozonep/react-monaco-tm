@@ -1,11 +1,11 @@
 {
   "name": "react-monaco-tm",
-  "version": "1.0.2",
+  "version": "1.0.8",
   "description": "React bindings for Monaco with Textmate grammar",
   "main": "lib/index.js",
   "scripts": {
     "build:clean": "npm run clean && npm run build && gulp copy-grammar",
-    "build": "sucrase ./src -d ./lib --transforms jsx,imports",
+    "build": "sucrase ./src -d ./lib --transforms jsx",
     "clean": "rimraf lib"
   },
   "repository": {

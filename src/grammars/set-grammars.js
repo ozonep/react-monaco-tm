@@ -14,7 +14,7 @@ export class TokenizerState {
     }
 }
 
-export function wireTmGrammars(monaco, registry, grammars, langId, scope, editor) {
+export function wireTmGrammars(monaco, registry, grammars, langId, editor) {
     if (!langsInjected) {
         langsInjected = true;
         return Promise.all(
@@ -42,7 +42,9 @@ const TMToMonacoToken = (editor, scopes) => {
     let scopeName = "";
     for (let i = scopes[0].length - 1; i >= 0; i -= 1) {
         const char = scopes[0][i];
-        if (char === ".") break;
+        if (char === ".") {
+            break;
+        }
         scopeName = char + scopeName;
     }
     for (let i = scopes.length - 1; i >= 0; i -= 1) {
@@ -51,10 +53,10 @@ const TMToMonacoToken = (editor, scopes) => {
             const char = scope[i];
             if (char === ".") {
                 const token = scope.slice(0, i);
-                if (editor._themeService.getTheme()._tokenTheme._match(token + "." + scopeName)._foreground > 1) {
+                if (editor['_themeService'].getTheme()._tokenTheme._match(token + "." + scopeName)._foreground > 1) {
                     return token + "." + scopeName;
                 }
-                if (editor._themeService.getTheme()._tokenTheme._match(token)._foreground > 1) {
+                if (editor['_themeService'].getTheme()._tokenTheme._match(token)._foreground > 1) {
                     return token;
                 }
             }

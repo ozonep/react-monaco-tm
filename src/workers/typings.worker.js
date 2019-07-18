@@ -3,7 +3,7 @@ import path from 'path';
 import { Store, set as setItem, get as getItem } from 'idb-keyval';
 
 self.importScripts(
-  'https://cdnjs.cloudflare.com/ajax/libs/typescript/2.9.2/typescript.min.js'
+  'https://cdnjs.cloudflare.com/ajax/libs/typescript/3.5.3/typescript.min.js'
 );
 
 const ROOT_URL = `https://cdn.jsdelivr.net/`;

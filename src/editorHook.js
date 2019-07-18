@@ -1,70 +1,57 @@
 /* eslint-disable */
-import * as monaco from 'monaco-editor-no-lang/esm/vs/editor/editor.api';
+import {monaco} from './utils/index';
 import PropTypes from "prop-types";
-import React, {useEffect, useRef} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {processSize} from "./utils";
 import {liftOff} from './grammars/configure-tokenizer';
 import {langConfigs} from "./grammars/langConfigurations";
+import config from './themes';
 
+function usePrevious(value) {
+    const ref = useRef(null);
+    useEffect(() => {
+        ref.current = value;
+    });
+    return ref.current;
+}
 
-const noop = () => {};
+const noop = () => {
+};
 
-let editor = null;
 let langsConfigured = false;
 
-function Configurator() {
+function Configurator(monaco) {
     langConfigs(monaco);
     langsConfigured = true;
 }
 
-!langsConfigured && Configurator();
+
+let overrideLangauges = [
+    'css',
+    'html',
+    'javascript',
+    'javascriptreact',
+    'python'
+];
 
 
-monaco.languages.typescript.javascriptDefaults.setDiagnosticsOptions({
-    noSemanticValidation: false,
-    noSyntaxValidation: false,
-});
-
-const compilerDefaults = {
-    jsxFactory: 'React.createElement',
-    reactNamespace: 'React',
-    jsx: monaco.languages.typescript.JsxEmit.React,
-    target: monaco.languages.typescript.ScriptTarget.ESNext,
-    allowNonTsExtensions: true,
-    moduleResolution: monaco.languages.typescript.ModuleResolutionKind.NodeJs,
-    module: monaco.languages.typescript.ModuleKind.System,
-    experimentalDecorators: true,
-    noEmit: true,
-    allowJs: true,
-    typeRoots: ['node_modules/@types'],
-    newLine: monaco.languages.typescript.NewLineKind.LineFeed,
-};
-
-monaco.languages.typescript.typescriptDefaults.setCompilerOptions(compilerDefaults);
-monaco.languages.typescript.javascriptDefaults.setCompilerOptions(compilerDefaults);
-
-const findModel = (path) => monaco.editor.getModels().find(model => model.uri.path === `${path}`);
+const findModel = (path, monaco) => monaco.editor.getModels().find(model => model.uri.path === `${path}`);
 const editorStates = new Map();
 const extraLibs = new Map();
 
 
 function MonacoEditor(props) {
     const containerElement = useRef(null);
-    const {options, width, height, path, theme} = props;
+    const editorRef = useRef(null);
+    const monacoRef = useRef(null);
+    const {options, width, height, path} = props;
     let value = props.value !== null ? props.value : props.defaultValue;
     let typingsWorker;
     let subscription;
-
-    // const usePrevious = (value) => {
-    //     const ref = useRef();
-    //     useEffect(() => {
-    //         ref.current = value;
-    //     });
-    //     return ref.current;
-    // };
+    const prevPath = usePrevious(path);
 
     const updateDimensions = () => {
-        editor.layout();
+        editorRef.current.layout();
     };
 
     const removePath = (path) => {
@@ -80,13 +67,45 @@ function MonacoEditor(props) {
     //     removePath(oldPath);
     // };
 
-    const editorDidMount = (editor) => {
+    const editorDidMount = () => {
+        monacoRef.current.languages.getLanguages().forEach(function (lang) {
+            if (overrideLangauges.includes(lang.id)) {
+                lang.loader = function () {
+                    return {
+                        then: function () {
+                        }
+                    };
+                };
+            }
+        });
         window.addEventListener("resize", updateDimensions);
-        // props.editorDidMount(model);
-        monaco.languages.typescript.typescriptDefaults.setMaximumWorkerIdleTime(-1);
-        monaco.languages.typescript.javascriptDefaults.setMaximumWorkerIdleTime(-1);
-        monaco.languages.typescript.typescriptDefaults.setEagerModelSync(true);
-        monaco.languages.typescript.javascriptDefaults.setEagerModelSync(true);
+        monacoRef.current.languages.typescript.typescriptDefaults.setMaximumWorkerIdleTime(-1);
+        monacoRef.current.languages.typescript.javascriptDefaults.setMaximumWorkerIdleTime(-1);
+        monacoRef.current.languages.typescript.typescriptDefaults.setEagerModelSync(true);
+        monacoRef.current.languages.typescript.javascriptDefaults.setEagerModelSync(true);
+        !langsConfigured && Configurator(monacoRef.current);
+        const compilerDefaults = {
+            jsxFactory: 'React.createElement',
+            reactNamespace: 'React',
+            jsx: monacoRef.current.languages.typescript.JsxEmit.React,
+            target: monacoRef.current.languages.typescript.ScriptTarget.ESNext,
+            allowNonTsExtensions: true,
+            moduleResolution: monacoRef.current.languages.typescript.ModuleResolutionKind.NodeJs,
+            module: monacoRef.current.languages.typescript.ModuleKind.System,
+            experimentalDecorators: true,
+            noEmit: true,
+            allowJs: true,
+            typeRoots: ['node_modules/@types'],
+            newLine: monacoRef.current.languages.typescript.NewLineKind.LineFeed,
+        };
+        monacoRef.current.languages.typescript.typescriptDefaults.setCompilerOptions(compilerDefaults);
+        monacoRef.current.languages.typescript.javascriptDefaults.setCompilerOptions(compilerDefaults);
+        monacoRef.current.languages.typescript.javascriptDefaults.setDiagnosticsOptions({
+            noSemanticValidation: false,
+            noSyntaxValidation: false,
+        });
+        monacoRef.current.editor.defineTheme('one-dark', config.theme['one-dark']);
+        monacoRef.current.editor.setTheme('one-dark');
     };
 
     const initMonaco = async () => {
@@ -97,29 +116,26 @@ function MonacoEditor(props) {
             version: '16.8.6'
         });
         if (containerElement.current) {
-            editor = monaco.editor.create(containerElement.current, {
+            editorRef.current = monacoRef.current.editor.create(containerElement.current, {
                 model: null,
                 ...options
             });
-            const {default: data} = await import('./themes/oneDarkMonaco');
-            monaco.editor.defineTheme('one-dark', data);
-            monaco.editor.setTheme('one-dark');
-            await editorDidMount(editor);
+            await editorDidMount();
             initializeFile(path, value);
         }
     };
 
     const destroyMonaco = () => {
-        if (typeof editor !== "undefined") {
+        if (typeof monacoRef.current !== "undefined") {
             window.removeEventListener("resize", updateDimensions);
             typingsWorker && typingsWorker.terminate();
             subscription && subscription.dispose();
-            editor.dispose();
+            monacoRef.current.dispose();
         }
     };
 
     const initializeFile = (path, value) => {
-        let model = findModel(path);
+        let model = findModel(path, monacoRef.current);
         console.log("INITIALIZATION");
         if (model) {
             console.log("MODEL_EXISTS");
@@ -134,10 +150,10 @@ function MonacoEditor(props) {
             );
         } else {
             console.log("MODEL_DOESN'T EXIST");
-            model = monaco.editor.createModel(
+            model = monacoRef.current.editor.createModel(
                 value,
                 undefined,
-                monaco.Uri.from({scheme: 'file', path})
+                monacoRef.current.Uri.from({scheme: 'file', path})
             );
             console.log('MODEL CREATED');
             model.updateOptions({
@@ -147,6 +163,16 @@ function MonacoEditor(props) {
         }
     };
 
+    subscription = editorRef.current && editorRef.current.onDidChangeModelContent(() => {
+        let model = editorRef.current.getModel();
+        if (model) {
+            const value = model.getValue();
+            if (value !== props.value) {
+                props.onChange(value, editorRef.current);
+            }
+        }
+    });
+
     const addTypings = ({typings}) => {
         Object.keys(typings).forEach(path => {
             let extraLib = extraLibs.get(path);
@@ -154,9 +180,9 @@ function MonacoEditor(props) {
                 extraLib.js && extraLib.js.dispose();
                 extraLib.ts && extraLib.ts.dispose();
             }
-            extraLib = monaco.languages.typescript.javascriptDefaults.addExtraLib(
+            extraLib = monacoRef.current.languages.typescript.javascriptDefaults.addExtraLib(
                 typings[path],
-                monaco.Uri.from({scheme: 'file', path}).toString()
+                monacoRef.current.Uri.from({scheme: 'file', path}).toString()
             );
             extraLibs.set(path, extraLib);
         });
@@ -164,34 +190,54 @@ function MonacoEditor(props) {
 
     const openFile = async (path, value) => {
         initializeFile(path, value);
-        let model = findModel(path);
-        if (editor && model) {
-            await editor.setModel(model);
+        let model = findModel(path, monacoRef.current);
+        if (editorRef.current && model) {
+            console.log("Opening file!");
+            await editorRef.current.setModel(model);
             // const editorState = editorStates.get(path);
             // if (editorState) editor.restoreViewState(editorState);
-            // editor.focus();
+            editorRef.current.focus();
         }
     };
 
     useEffect(() => {
-       initMonaco().then(() => {
-           subscription = editor.onDidChangeModelContent(() => {
-               let model = editor.getModel();
-               if (model) {
-                   const value = model.getValue();
-                   if (value !== props.value) {
-                       props.onChange(value, editor);
-                   }
-               }
-           });
-       });
+        monaco
+            .init()
+            .then(monaco => (monacoRef.current = monaco) && initMonaco())
+            .then(() => {
+                async function changePath() {
+                    console.log('PATH CHANGED');
+                    // editorStates.set(prevPath, editor.saveViewState());
+                    console.log("Path before0", path);
+                    await openFile(path, value);
+                    console.log("Path after0", path);
+                    console.log('THIS IS LANG', editorRef.current.getModel().getModeId());
+                    await liftOff(monacoRef.current, editorRef.current.getModel().getModeId(), editorRef.current);
+                }
+                changePath().then(() => {
+                    subscription = editorRef.current && editorRef.current.onDidChangeModelContent(() => {
+                        let model = editorRef.current.getModel();
+                        if (model) {
+                            const value = model.getValue();
+                            console.log("SubPath", path);
+                            console.log("SubPrevPath", prevPath);
+                            // if (value !== props.value && prevPath === path) {
+                            if (value !== props.value) {
+                                props.onChange(value, editorRef.current);
+                            }
+                        }
+                    });
+                    console.log("subscribing!");
+                });
+
+            });
         return () => destroyMonaco();
     }, []);
 
     useEffect(() => {
-            if (editor && editor.getModel()) {
-                const model = editor.getModel();
-                editor.executeEdits(null, [
+            if (editorRef.current && editorRef.current.getModel()) {
+                const model = editorRef.current.getModel();
+                editorRef.current.executeEdits(null, [
                     {
                         range: model.getFullModelRange(),
                         text: value,
@@ -208,12 +254,11 @@ function MonacoEditor(props) {
                 console.log('PATH CHANGED');
                 // editorStates.set(prevPath, editor.saveViewState());
                 await openFile(path, value);
-                console.log('THIS IS LANG', editor.getModel().getModeId());
-                await liftOff(monaco, editor.getModel().getModeId(), editor);
-
+                console.log('THIS IS LANG', editorRef.current.getModel().getModeId());
+                await liftOff(monacoRef.current, editorRef.current.getModel().getModeId(), editorRef.current);
             }
 
-            if (editor) {
+            if (editorRef.current) {
                 changePath()
             }
         },
@@ -221,13 +266,13 @@ function MonacoEditor(props) {
     );
 
     useEffect(() => {
-            if (editor) editor.updateOptions(props.options);
+            if (editorRef.current) editorRef.current.updateOptions(props.options);
         },
         [options]
     );
 
     useEffect(() => {
-            if (editor) editor.layout();
+            if (editorRef.current) editorRef.current.layout();
         },
         [width, height]
     );
@@ -250,18 +295,21 @@ const edOptions = {
     selectOnLineNumbers: true,
     autoIndent: true,
     formatOnType: true,
+    formatOnPaste: true,
     lineDecorationsWidth: 10,
     fontLigatures: true,
     folding: false,
     contextmenu: false,
     fontSize: "14px",
-    fontFamily: "'Dank Mono', 'Fira Code', Monaco, monospace",
+    fontFamily: "'Fira Code', Monaco, monospace",
     scrollBeyondLastLine: false,
     scrollBeyondLastColumn: 2,
     roundedSelection: false,
     readOnly: false,
     cursorStyle: 'line',
+    wordWrap: "on",
     automaticLayout: false,
+    stopRenderingLineAfter: 5000,
     minimap: {
         enabled: false
     }
@@ -281,10 +329,10 @@ MonacoEditor.propTypes = {
 
 MonacoEditor.defaultProps = {
     width: "100%",
-    height: "94vh",
+    height: "93vh",
     value: null,
     defaultValue: "",
-    path: "/style.css",
+    path: null,
     theme: null,
     options: edOptions,
     editorDidMount: noop,

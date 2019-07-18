@@ -1,7 +1,7 @@
 // This on "One Dark Pro" VSCode theme converted to Monaco format
 export default {
     type: "dark",
-    inherit: false,
+    inherit: true,
     base: "vs-dark",
     colors: {
         "activityBar.background": "#282c34",
@@ -57,6 +57,7 @@ export default {
         "list.highlightForeground": "#c5c5c5",
         "list.inactiveSelectionBackground": "#2c313a",
         "list.inactiveSelectionForeground": "#d7dae0",
+        "menu.foreground": "#c8c8c8",
         "peekViewEditor.background": "#1b1d23",
         "peekViewEditor.matchHighlightBackground": "#29244b",
         "peekViewResult.background": "#22262b",
@@ -75,6 +76,7 @@ export default {
         "statusBarItem.remoteForeground": "#f8fafd",
         "statusBarItem.remoteBackground": "#4d78cc",
         "tab.activeBackground": "#282c34",
+        "tab.activeForeground": "#dcdcdc",
         "tab.border": "#181a1f",
         "tab.inactiveBackground": "#21252b",
         "tab.hoverBackground": "#323842",
@@ -104,6 +106,14 @@ export default {
     },
     rules: [
         {
+            "token": "variable.other.generic-type.haskell",
+            "foreground": "#d55fde"
+        },
+        {
+            "token": "storage.type.haskell",
+            "foreground": "#d19a66"
+        },
+        {
             "token": "support.variable.magic.python",
             "foreground": "#ef596f"
         },
@@ -130,6 +140,22 @@ export default {
         {
             "token": "variable.parameter.function.language.special.self.python",
             "foreground": "#e5c07b"
+        },
+        {
+            "token": "storage.modifier.lifetime.rust",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "support.function.std.rust",
+            "foreground": "#61afef"
+        },
+        {
+            "token": "entity.name.lifetime.rust",
+            "foreground": "#e5c07b"
+        },
+        {
+            "token": "variable.language.rust",
+            "foreground": "#ef596f"
         },
         {
             "token": "support.constant.edge",
@@ -190,6 +216,50 @@ export default {
             "foreground": "#ef596f"
         },
         {
+            "token": "meta.function.c",
+            "foreground": "#ef596f"
+        },
+        {
+            "token": "meta.function.cpp",
+            "foreground": "#ef596f"
+        },
+        {
+            "token": "punctuation.section.block.begin.bracket.curly.cpp",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "punctuation.section.block.end.bracket.curly.cpp",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "punctuation.terminator.statement.c",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "punctuation.section.block.begin.bracket.curly.c",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "punctuation.section.block.end.bracket.curly.c",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "punctuation.section.parens.begin.bracket.round.c",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "punctuation.section.parens.end.bracket.round.c",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "punctuation.section.parameters.begin.bracket.round.c",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "punctuation.section.parameters.end.bracket.round.c",
+            "foreground": "#abb2bf"
+        },
+        {
             "token": "punctuation.separator.key-value",
             "foreground": "#abb2bf"
         },
@@ -232,6 +302,126 @@ export default {
         {
             "token": "variable.other.constant",
             "foreground": "#e5c07b"
+        },
+        {
+            "token": "storage.type.annotation.java",
+            "foreground": "#e5c07b"
+        },
+        {
+            "token": "storage.type.object.array.java",
+            "foreground": "#e5c07b"
+        },
+        {
+            "token": "source.java",
+            "foreground": "#ef596f"
+        },
+        {
+            "token": "punctuation.section.block.begin.java",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "punctuation.section.block.end.java",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "punctuation.definition.method-parameters.begin.java",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "punctuation.definition.method-parameters.end.java",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "meta.method.identifier.java",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "punctuation.section.method.begin.java",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "punctuation.section.method.end.java",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "punctuation.terminator.java",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "punctuation.section.class.begin.java",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "punctuation.section.class.end.java",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "punctuation.section.inner-class.begin.java",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "punctuation.section.inner-class.end.java",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "meta.method-call.java",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "punctuation.section.class.begin.bracket.curly.java",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "punctuation.section.class.end.bracket.curly.java",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "punctuation.section.method.begin.bracket.curly.java",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "punctuation.section.method.end.bracket.curly.java",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "punctuation.separator.period.java",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "punctuation.bracket.angle.java",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "punctuation.definition.annotation.java",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "meta.method.body.java",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "meta.method.java",
+            "foreground": "#61afef"
+        },
+        {
+            "token": "storage.modifier.import.java",
+            "foreground": "#e5c07b"
+        },
+        {
+            "token": "storage.type.java",
+            "foreground": "#e5c07b"
+        },
+        {
+            "token": "storage.type.generic.java",
+            "foreground": "#e5c07b"
+        },
+        {
+            "token": "keyword.operator.instanceof.java",
+            "foreground": "#d55fde"
+        },
+        {
+            "token": "meta.definition.variable.name.java",
+            "foreground": "#ef596f"
         },
         {
             "token": "keyword.operator.logical.js",
@@ -358,6 +548,10 @@ export default {
             "foreground": "#d55fde"
         },
         {
+            "token": "keyword.operator.expression.keyof",
+            "foreground": "#d55fde"
+        },
+        {
             "token": "support.type.object.console",
             "foreground": "#ef596f"
         },
@@ -410,8 +604,80 @@ export default {
             "foreground": "#2bbac5"
         },
         {
+            "token": "keyword.operator.assignment.c",
+            "foreground": "#d55fde"
+        },
+        {
+            "token": "keyword.operator.comparison.c",
+            "foreground": "#d55fde"
+        },
+        {
+            "token": "keyword.operator.c",
+            "foreground": "#d55fde"
+        },
+        {
+            "token": "keyword.operator.increment.c",
+            "foreground": "#d55fde"
+        },
+        {
+            "token": "keyword.operator.decrement.c",
+            "foreground": "#d55fde"
+        },
+        {
+            "token": "keyword.operator.bitwise.shift.c",
+            "foreground": "#d55fde"
+        },
+        {
+            "token": "keyword.operator.assignment.cpp",
+            "foreground": "#d55fde"
+        },
+        {
+            "token": "keyword.operator.comparison.cpp",
+            "foreground": "#d55fde"
+        },
+        {
+            "token": "keyword.operator.cpp",
+            "foreground": "#d55fde"
+        },
+        {
+            "token": "keyword.operator.increment.cpp",
+            "foreground": "#d55fde"
+        },
+        {
+            "token": "keyword.operator.decrement.cpp",
+            "foreground": "#d55fde"
+        },
+        {
+            "token": "keyword.operator.bitwise.shift.cpp",
+            "foreground": "#d55fde"
+        },
+        {
             "token": "punctuation.separator.delimiter",
             "foreground": "#abb2bf"
+        },
+        {
+            "token": "punctuation.separator.c",
+            "foreground": "#d55fde"
+        },
+        {
+            "token": "punctuation.separator.cpp",
+            "foreground": "#d55fde"
+        },
+        {
+            "token": "support.type.posix-reserved.c",
+            "foreground": "#2bbac5"
+        },
+        {
+            "token": "support.type.posix-reserved.cpp",
+            "foreground": "#2bbac5"
+        },
+        {
+            "token": "keyword.operator.sizeof.c",
+            "foreground": "#d55fde"
+        },
+        {
+            "token": "keyword.operator.sizeof.cpp",
+            "foreground": "#d55fde"
         },
         {
             "token": "variable.parameter.function.language.python",
@@ -455,7 +721,7 @@ export default {
         },
         {
             "token": "constant.character.format.placeholder.other.python",
-            "foreground": "#89ca78"
+            "foreground": "#d19a66"
         },
         {
             "token": "none",
@@ -479,6 +745,14 @@ export default {
         },
         {
             "token": "variable.language",
+            "foreground": "#e5c07b"
+        },
+        {
+            "token": "token.variable.parameter.java",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "import.storage.java",
             "foreground": "#e5c07b"
         },
         {
@@ -532,6 +806,10 @@ export default {
         {
             "token": "variable.other.class.ts",
             "foreground": "#e5c07b"
+        },
+        {
+            "token": "variable.other.class.php",
+            "foreground": "#ef596f"
         },
         {
             "token": "entity.name.type",
@@ -596,6 +874,10 @@ export default {
         {
             "token": "keyword.operator.expression.void",
             "foreground": "#d55fde"
+        },
+        {
+            "token": "token.storage.type.java",
+            "foreground": "#e5c07b"
         },
         {
             "token": "support.function",
@@ -723,6 +1005,87 @@ export default {
             "foreground": "#d55fde"
         },
         {
+            "token": "entity.name.section.markdown",
+            "foreground": "#ef596f"
+        },
+        {
+            "token": "punctuation.definition.heading.markdown",
+            "foreground": "#ef596f"
+        },
+        {
+            "token": "punctuation.definition.list.begin.markdown",
+            "foreground": "#ef596f"
+        },
+        {
+            "token": "markup.heading.setext",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "punctuation.definition.bold.markdown",
+            "foreground": "#d19a66"
+        },
+        {
+            "token": "markup.inline.raw.markdown",
+            "foreground": "#89ca78"
+        },
+        {
+            "token": "markup.inline.raw.string.markdown",
+            "foreground": "#89ca78"
+        },
+        {
+            "token": "punctuation.definition.list.markdown",
+            "foreground": "#ef596f"
+        },
+        {
+            "token": "markup.quote.markdown",
+            "foreground": "#5c6370",
+            "fontStyle": "italic"
+        },
+        {
+            "token": "punctuation.definition.string.begin.markdown",
+            "foreground": "#ef596f"
+        },
+        {
+            "token": "punctuation.definition.string.end.markdown",
+            "foreground": "#ef596f"
+        },
+        {
+            "token": "punctuation.definition.metadata.markdown",
+            "foreground": "#ef596f"
+        },
+        {
+            "token": "beginning.punctuation.definition.list.markdown",
+            "foreground": "#ef596f"
+        },
+        {
+            "token": "punctuation.definition.metadata.markdown",
+            "foreground": "#ef596f"
+        },
+        {
+            "token": "markup.underline.link.markdown",
+            "foreground": "#d55fde"
+        },
+        {
+            "token": "markup.underline.link.image.markdown",
+            "foreground": "#d55fde"
+        },
+        {
+            "token": "string.other.link.title.markdown",
+            "foreground": "#61afef"
+        },
+        {
+            "token": "string.other.link.description.markdown",
+            "foreground": "#61afef"
+        },
+        {
+            "token": "markup.italic.markdown",
+            "fontStyle": "italic"
+        },
+        {
+            "token": "markup.bold.markdown",
+            "fontStyle": "bold"
+        },
+        {
             "token": "string.regexp",
             "foreground": "#2bbac5"
         },
@@ -795,6 +1158,214 @@ export default {
             "foreground": "#ef596f"
         },
         {
+            "token": "text.html.laravel-blade source.php.embedded.line.html entity.name.tag.laravel-blade",
+            "foreground": "#d55fde"
+        },
+        {
+            "token": "text.html.laravel-blade source.php.embedded.line.html support.constant.laravel-blade",
+            "foreground": "#d55fde"
+        },
+        {
+            "token": "support.other.namespace.use.php",
+            "foreground": "#e5c07b"
+        },
+        {
+            "token": "support.other.namespace.use-as.php",
+            "foreground": "#e5c07b"
+        },
+        {
+            "token": "support.other.namespace.php",
+            "foreground": "#e5c07b"
+        },
+        {
+            "token": "entity.other.alias.php",
+            "foreground": "#e5c07b"
+        },
+        {
+            "token": "meta.interface.php",
+            "foreground": "#e5c07b"
+        },
+        {
+            "token": "keyword.operator.error-control.php",
+            "foreground": "#d55fde"
+        },
+        {
+            "token": "keyword.operator.type.php",
+            "foreground": "#d55fde"
+        },
+        {
+            "token": "punctuation.section.array.begin.php",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "punctuation.section.array.end.php",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "invalid.illegal.non-null-typehinted.php",
+            "foreground": "#f44747"
+        },
+        {
+            "token": "storage.type.php",
+            "foreground": "#e5c07b"
+        },
+        {
+            "token": "meta.other.type.phpdoc.php",
+            "foreground": "#e5c07b"
+        },
+        {
+            "token": "keyword.other.type.php",
+            "foreground": "#e5c07b"
+        },
+        {
+            "token": "keyword.other.array.phpdoc.php",
+            "foreground": "#e5c07b"
+        },
+        {
+            "token": "meta.function-call.php",
+            "foreground": "#61afef"
+        },
+        {
+            "token": "meta.function-call.object.php",
+            "foreground": "#61afef"
+        },
+        {
+            "token": "meta.function-call.static.php",
+            "foreground": "#61afef"
+        },
+        {
+            "token": "punctuation.definition.parameters.begin.bracket.round.php",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "punctuation.definition.parameters.end.bracket.round.php",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "punctuation.separator.delimiter.php",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "punctuation.section.scope.begin.php",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "punctuation.section.scope.end.php",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "punctuation.terminator.expression.php",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "punctuation.definition.arguments.begin.bracket.round.php",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "punctuation.definition.arguments.end.bracket.round.php",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "punctuation.definition.storage-type.begin.bracket.round.php",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "punctuation.definition.storage-type.end.bracket.round.php",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "punctuation.definition.array.begin.bracket.round.php",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "punctuation.definition.array.end.bracket.round.php",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "punctuation.definition.begin.bracket.round.php",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "punctuation.definition.end.bracket.round.php",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "punctuation.definition.begin.bracket.curly.php",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "punctuation.definition.end.bracket.curly.php",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "punctuation.definition.section.switch-block.end.bracket.curly.php",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "punctuation.definition.section.switch-block.start.bracket.curly.php",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "punctuation.definition.section.switch-block.begin.bracket.curly.php",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "punctuation.definition.section.switch-block.end.bracket.curly.php",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "support.constant.ext.php",
+            "foreground": "#d19a66"
+        },
+        {
+            "token": "support.constant.std.php",
+            "foreground": "#d19a66"
+        },
+        {
+            "token": "support.constant.core.php",
+            "foreground": "#d19a66"
+        },
+        {
+            "token": "support.constant.parser-token.php",
+            "foreground": "#d19a66"
+        },
+        {
+            "token": "entity.name.goto-label.php",
+            "foreground": "#61afef"
+        },
+        {
+            "token": "support.other.php",
+            "foreground": "#61afef"
+        },
+        {
+            "token": "keyword.operator.logical.php",
+            "foreground": "#2bbac5"
+        },
+        {
+            "token": "keyword.operator.bitwise.php",
+            "foreground": "#2bbac5"
+        },
+        {
+            "token": "keyword.operator.arithmetic.php",
+            "foreground": "#2bbac5"
+        },
+        {
+            "token": "keyword.operator.regexp.php",
+            "foreground": "#d55fde"
+        },
+        {
+            "token": "keyword.operator.comparison.php",
+            "foreground": "#2bbac5"
+        },
+        {
+            "token": "keyword.operator.heredoc.php",
+            "foreground": "#d55fde"
+        },
+        {
+            "token": "keyword.operator.nowdoc.php",
+            "foreground": "#d55fde"
+        },
+        {
             "token": "meta.function.decorator.python",
             "foreground": "#61afef"
         },
@@ -817,6 +1388,18 @@ export default {
         {
             "token": "function.brace",
             "foreground": "#abb2bf"
+        },
+        {
+            "token": "function.parameter.ruby",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "function.parameter.cs",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "constant.language.symbol.ruby",
+            "foreground": "#2bbac5"
         },
         {
             "token": "rgb-value",
@@ -919,10 +1502,6 @@ export default {
             "foreground": "#ef596f"
         },
         {
-            "token": "variable.parameter.js",
-            "foreground": "#ef596f"
-        },
-        {
             "token": "keyword.other.template.begin",
             "foreground": "#89ca78"
         },
@@ -941,6 +1520,26 @@ export default {
         {
             "token": "keyword.operator.assignment",
             "foreground": "#2bbac5"
+        },
+        {
+            "token": "keyword.operator.assignment.go",
+            "foreground": "#e5c07b"
+        },
+        {
+            "token": "keyword.operator.address.go",
+            "foreground": "#e5c07b"
+        },
+        {
+            "token": "entity.name.package.go",
+            "foreground": "#e5c07b"
+        },
+        {
+            "token": "support.type.prelude.elm",
+            "foreground": "#2bbac5"
+        },
+        {
+            "token": "support.constant.elm",
+            "foreground": "#d19a66"
         },
         {
             "token": "punctuation.quasi.element",
@@ -971,6 +1570,14 @@ export default {
             "foreground": "#2bbac5"
         },
         {
+            "token": "meta.arguments.coffee",
+            "foreground": "#ef596f"
+        },
+        {
+            "token": "variable.parameter.function.coffee",
+            "foreground": "#ef596f"
+        },
+        {
             "token": "source.ini",
             "foreground": "#89ca78"
         },
@@ -981,6 +1588,22 @@ export default {
         {
             "token": "source.makefile",
             "foreground": "#e5c07b"
+        },
+        {
+            "token": "storage.modifier.import.groovy",
+            "foreground": "#e5c07b"
+        },
+        {
+            "token": "meta.method.groovy",
+            "foreground": "#61afef"
+        },
+        {
+            "token": "meta.definition.variable.name.groovy",
+            "foreground": "#ef596f"
+        },
+        {
+            "token": "meta.definition.class.inherited.classes.groovy",
+            "foreground": "#89ca78"
         },
         {
             "token": "support.variable.semantic.hlsl",
@@ -1019,8 +1642,88 @@ export default {
             "foreground": "#ef596f"
         },
         {
+            "token": "support.type.swift",
+            "foreground": "#e5c07b"
+        },
+        {
             "token": "support.type.vb.asp",
             "foreground": "#e5c07b"
+        },
+        {
+            "token": "entity.name.function.xi",
+            "foreground": "#e5c07b"
+        },
+        {
+            "token": "entity.name.class.xi",
+            "foreground": "#2bbac5"
+        },
+        {
+            "token": "constant.character.character-class.regexp.xi",
+            "foreground": "#ef596f"
+        },
+        {
+            "token": "constant.regexp.xi",
+            "foreground": "#d55fde"
+        },
+        {
+            "token": "keyword.control.xi",
+            "foreground": "#2bbac5"
+        },
+        {
+            "token": "invalid.xi",
+            "foreground": "#abb2bf"
+        },
+        {
+            "token": "beginning.punctuation.definition.quote.markdown.xi",
+            "foreground": "#89ca78"
+        },
+        {
+            "token": "beginning.punctuation.definition.list.markdown.xi",
+            "foreground": "#7f848e"
+        },
+        {
+            "token": "constant.character.xi",
+            "foreground": "#61afef"
+        },
+        {
+            "token": "accent.xi",
+            "foreground": "#61afef"
+        },
+        {
+            "token": "wikiword.xi",
+            "foreground": "#d19a66"
+        },
+        {
+            "token": "constant.other.color.rgb-value.xi",
+            "foreground": "#ffffff"
+        },
+        {
+            "token": "punctuation.definition.tag.xi",
+            "foreground": "#5c6370"
+        },
+        {
+            "token": "entity.name.label.cs",
+            "foreground": "#e5c07b"
+        },
+        {
+            "token": "entity.name.scope-resolution.function.call",
+            "foreground": "#e5c07b"
+        },
+        {
+            "token": "entity.name.scope-resolution.function.definition",
+            "foreground": "#e5c07b"
+        },
+        {
+            "token": "entity.name.label.cs",
+            "foreground": "#ef596f"
+        },
+        {
+            "token": "markup.heading.setext.1.markdown",
+            "foreground": "#ef596f"
+        },
+        {
+            "token": "markup.heading.setext.2.markdown",
+            "foreground": "#ef596f"
         }
     ],
 };

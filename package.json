@@ -1,10 +1,11 @@
 {
   "name": "react-monaco-tm",
-  "version": "0.1.2",
+  "version": "1.0.00",
   "description": "React bindings for Monaco with Textmate grammar",
   "main": "lib/index.js",
   "scripts": {
-    "build": "babel src --out-dir lib",
+    "build:clean": "npm run clean && npm run build && gulp copy-grammar",
+    "build": "sucrase ./src -d ./lib --transforms jsx,imports",
     "clean": "rimraf lib"
   },
   "repository": {
@@ -24,23 +25,19 @@
   },
   "homepage": "https://github.com/ozonep/react-monaco-tm#readme",
   "devDependencies": {
-    "@babel/cli": "^7.4.4",
-    "@babel/core": "^7.4.5",
-    "@babel/preset-react": "^7.0.0",
-    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
-    "eslint": "^5.16.0",
+    "eslint": "^6.0.1",
     "idb-keyval": "^3.2.0",
     "react": "^16.8.6",
     "rimraf": "^2.6.3",
-    "babel-preset-modern-browsers": "^12.0.0-beta.1"
+    "gulp": "^4.0.2",
+    "sucrase": "^3.10.1"
   },
   "peerDependencies": {
     "react": "^16.x"
   },
   "dependencies": {
-    "monaco-editor-no-lang": "^1.18.0",
+    "filer": "^1.1.2",
     "onigasm": "^2.2.2",
-    "prop-types": "^15.7.2",
-    "filer": "^1.1.2"
+    "prop-types": "^15.7.2"
   }
 }

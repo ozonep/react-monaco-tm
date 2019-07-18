@@ -1,9 +1,0 @@
-{
-  "presets": [
-    ["modern-browsers", { "edge": false }],
-    "@babel/preset-react"
-  ],
-  "plugins": [
-    "@babel/plugin-syntax-dynamic-import"
-  ]
-}

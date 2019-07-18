@@ -37,4 +37,4 @@ export const grammars = [
   }
 ];
 
-export const languages = ["css", "html", "javascriptreact", "javascript", "json", "python", "typescript", "typescriptreact"];
+export const languages = ["css", "html", "javascript", "json", "python", "typescript"];

@@ -208,22 +208,18 @@ function MonacoEditor(props) {
                 async function changePath() {
                     console.log('PATH CHANGED');
                     // editorStates.set(prevPath, editor.saveViewState());
-                    console.log("Path before0", path);
                     await openFile(path, value);
-                    console.log("Path after0", path);
                     console.log('THIS IS LANG', editorRef.current.getModel().getModeId());
                     await liftOff(monacoRef.current, editorRef.current.getModel().getModeId(), editorRef.current);
                 }
                 changePath().then(() => {
-                    subscription = editorRef.current && editorRef.current.onDidChangeModelContent(() => {
+                    subscription = editorRef.current && editorRef.current.onKeyUp(() => {
                         let model = editorRef.current.getModel();
+                        let uriPath = model.uri.path;
                         if (model) {
                             const value = model.getValue();
-                            console.log("SubPath", path);
-                            console.log("SubPrevPath", prevPath);
-                            // if (value !== props.value && prevPath === path) {
                             if (value !== props.value) {
-                                props.onChange(value, editorRef.current);
+                                props.onChange(value, uriPath);
                             }
                         }
                     });

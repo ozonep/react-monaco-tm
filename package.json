@@ -1,6 +1,6 @@
 {
   "name": "react-monaco-tm",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "React bindings for Monaco with Textmate grammar",
   "main": "lib/index.js",
   "scripts": {
@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/ozonep/react-monaco-tm#readme",
   "devDependencies": {
-    "eslint": "^6.0.1",
+    "eslint": "^6.1.0",
     "idb-keyval": "^3.2.0",
     "react": "^16.8.6",
     "rimraf": "^2.6.3",

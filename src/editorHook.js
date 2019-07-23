@@ -6,6 +6,7 @@ import {processSize} from "./utils";
 import {liftOff} from './grammars/configure-tokenizer';
 import {langConfigs} from "./grammars/langConfigurations";
 import config from './themes';
+import {minifyCheck} from './utils/isMinified';
 
 function usePrevious(value) {
     const ref = useRef(null);
@@ -44,9 +45,11 @@ function MonacoEditor(props) {
     const containerElement = useRef(null);
     const editorRef = useRef(null);
     const monacoRef = useRef(null);
+    const modelRef = useRef(null);
     const {options, width, height, path} = props;
     let value = props.value !== null ? props.value : props.defaultValue;
     let typingsWorker;
+    let tokenizerWorker;
     let subscription;
     const prevPath = usePrevious(path);
 
@@ -54,11 +57,11 @@ function MonacoEditor(props) {
         editorRef.current.layout();
     };
 
-    const removePath = (path) => {
-        editorStates.delete(path);
-        const model = findModel(path);
-        model && model.dispose();
-    };
+    // const removePath = (path) => {
+    //     editorStates.delete(path);
+    //     const model = findModel(path);
+    //     model && model.dispose();
+    // };
 
     // const renamePath = (oldPath, newPath) => {
     //     const selection = editorStates.get(oldPath);
@@ -106,6 +109,13 @@ function MonacoEditor(props) {
         });
         monacoRef.current.editor.defineTheme('one-dark', config.theme['one-dark']);
         monacoRef.current.editor.setTheme('one-dark');
+        editorRef.current.onDidPaste( ( e ) => {
+            const value = modelRef.current.getValue();
+            let isMinified = (value ? minifyCheck(value) : null);
+            if (isMinified) {
+                monacoRef.current.editor.setModelLanguage(modelRef.current, 'plaintext');
+            }
+        })
     };
 
     const initMonaco = async () => {
@@ -115,6 +125,7 @@ function MonacoEditor(props) {
             name: 'react',
             version: '16.8.6'
         });
+        //tokenizerWorker = new Worker('./workers/tokenizer.worker.js', {type: 'module',});
         if (containerElement.current) {
             editorRef.current = monacoRef.current.editor.create(containerElement.current, {
                 model: null,
@@ -126,37 +137,50 @@ function MonacoEditor(props) {
     };
 
     const destroyMonaco = () => {
-        if (typeof monacoRef.current !== "undefined") {
+        if (typeof editorRef.current !== "undefined") {
             window.removeEventListener("resize", updateDimensions);
             typingsWorker && typingsWorker.terminate();
             subscription && subscription.dispose();
-            monacoRef.current.dispose();
+            editorRef.current.dispose();
         }
     };
 
     const initializeFile = (path, value) => {
-        let model = findModel(path, monacoRef.current);
+        modelRef.current = findModel(path, monacoRef.current);
         console.log("INITIALIZATION");
-        if (model) {
+        let isMinified = (value ? minifyCheck(value) : null);
+        if (modelRef.current) {
             console.log("MODEL_EXISTS");
-            model.pushEditOperations(
+            console.log("isMinified?", isMinified);
+            if (isMinified) {
+                monacoRef.current.editor.setModelLanguage(modelRef.current, 'plaintext');
+            }
+            modelRef.current.pushEditOperations(
                 [],
                 [
                     {
-                        range: model.getFullModelRange(),
+                        range: modelRef.current.getFullModelRange(),
                         text: value,
                     },
                 ]
             );
         } else {
             console.log("MODEL_DOESN'T EXIST");
-            model = monacoRef.current.editor.createModel(
-                value,
-                undefined,
-                monacoRef.current.Uri.from({scheme: 'file', path})
-            );
+            if (isMinified) {
+                modelRef.current = monacoRef.current.editor.createModel(
+                    value,
+                    'plaintext',
+                    monacoRef.current.Uri.from({scheme: 'file', path})
+                );
+            } else {
+                modelRef.current = monacoRef.current.editor.createModel(
+                    value,
+                    undefined,
+                    monacoRef.current.Uri.from({scheme: 'file', path})
+                );
+            }
             console.log('MODEL CREATED');
-            model.updateOptions({
+            modelRef.current.updateOptions({
                 tabSize: 2,
                 insertSpaces: true,
             });
@@ -180,10 +204,9 @@ function MonacoEditor(props) {
 
     const openFile = async (path, value) => {
         initializeFile(path, value);
-        let model = findModel(path, monacoRef.current);
-        if (editorRef.current && model) {
+        if (editorRef.current && modelRef.current) {
             console.log("Opening file!");
-            await editorRef.current.setModel(model);
+            await editorRef.current.setModel(modelRef.current);
             // const editorState = editorStates.get(path);
             // if (editorState) editor.restoreViewState(editorState);
             editorRef.current.focus();
@@ -199,15 +222,18 @@ function MonacoEditor(props) {
                     console.log('PATH CHANGED');
                     // editorStates.set(prevPath, editor.saveViewState());
                     await openFile(path, value);
-                    console.log('THIS IS LANG', editorRef.current.getModel().getModeId());
+                    console.log('THIS IS LANG', modelRef.current.getModeId());
+                    let isMinified = (value ? minifyCheck(value) : null);
                     await liftOff(monacoRef.current, editorRef.current.getModel().getModeId(), editorRef.current);
+                    if (isMinified) {
+                        monacoRef.current.editor.setModelLanguage('plaintext');
+                    }
                 }
                 changePath().then(() => {
                     subscription = editorRef.current && editorRef.current.onKeyUp(() => {
-                        let model = editorRef.current.getModel();
-                        let uriPath = model.uri.path;
-                        if (model && uriPath) {
-                            const value = model.getValue();
+                        let uriPath = modelRef.current.uri.path;
+                        if (modelRef.current && uriPath) {
+                            const value = modelRef.current.getValue();
                             if (value !== props.value) {
                                 props.onChange(value, uriPath);
                             }
@@ -215,17 +241,15 @@ function MonacoEditor(props) {
                     });
                     console.log("subscribing!");
                 });
-
             });
         return () => destroyMonaco();
     }, []);
 
     useEffect(() => {
             if (editorRef.current && editorRef.current.getModel()) {
-                const model = editorRef.current.getModel();
                 editorRef.current.executeEdits(null, [
                     {
-                        range: model.getFullModelRange(),
+                        range: modelRef.current.getFullModelRange(),
                         text: value,
                     },
                 ]);
@@ -240,8 +264,8 @@ function MonacoEditor(props) {
                 console.log('PATH CHANGED');
                 // editorStates.set(prevPath, editor.saveViewState());
                 await openFile(path, value);
-                console.log('THIS IS LANG', editorRef.current.getModel().getModeId());
-                await liftOff(monacoRef.current, editorRef.current.getModel().getModeId(), editorRef.current);
+                console.log('THIS IS LANG', modelRef.current.getModeId());
+                //await liftOff(monacoRef.current, editorRef.current.getModel().getModeId(), editorRef.current);
             }
 
             if (editorRef.current) {

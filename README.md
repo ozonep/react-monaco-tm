@@ -2,25 +2,37 @@
 
 <div align="center">
 
-# WIP! 
+# WIP
 # It's in testing phase. 
 
 [Monaco Editor](https://github.com/Microsoft/monaco-editor) for React.
 
 <h4 align="center">react-monaco-tm</h4>
 
-
-
-[npm-url]: https://npmjs.org/package/react-monaco-hooks
-[downloads-image]: http://img.shields.io/npm/dm/react-monaco-editor.svg
-[npm-image]: http://img.shields.io/npm/v/react-monaco-editor.svg
+<h4>Finally found some time to add proper Readme :) </h4>
+<p>Monaco Editor I created for my private project.<br/>
+Feel free to use & contribute.<br/>
+You don't need "Monaco WebPack plugin" to use this package, 
+but you still need "Craco" or similar package in case you are using CRA, 
+because I rely on Web Worker (for fetching React typings) that is not supported by CRA as of now.
+Currently, this package supports basic tokenization for all Monaco supported languages, but for:
+<ul>
+<li>CSS</li>
+<li>HTML</li>
+<li>JS (including JSX)</li>
+<li>TS</li>
+<li>JSON</li>
+<li>Python</li>
+</ul>
+I added extended tokenization (the one we have in VS Code)
+</p>
 
 </div>
 
 ## Installation
 
 ```bash
-yarn add react-monaco-hooks
+npm install react-monaco-tm
 ```
 
 ## Using with Webpack
@@ -33,25 +45,39 @@ import MonacoEditor from 'react-monaco-tm';
 function App(props) {
   const [code, setCode] = useState('// type your code...');
    
-  const editorDidMount = (editor, monaco) => {
-    console.log('editorDidMount', editor);
-    editor.focus();
-  };
-  
-  const onChange = (newValue, e) => {
-    console.log('onChange', newValue, e);
+  const onChange = (newValue, selectedPath) => {
+    console.log('onChange', newValue, selectedPath);
   };
   
   const options = {
-    selectOnLineNumbers: true
-  };
-  
+      selectOnLineNumbers: true,
+      autoIndent: true,
+      formatOnType: true,
+      formatOnPaste: true,
+      lineDecorationsWidth: 10,
+      fontLigatures: false,
+      folding: false,
+      contextmenu: false,
+      fontSize: "14px",
+      fontFamily: "'Fira Code', Monaco, monospace",
+      scrollBeyondLastLine: false,
+      scrollBeyondLastColumn: 2,
+      roundedSelection: false,
+      readOnly: false,
+      cursorStyle: 'line',
+      automaticLayout: false,
+      wordWrap: "on",
+      stopRenderingLineAfter: 4000,
+      minimap: {
+          enabled: false
+      }
+}
+
   return (
     <MonacoEditor
-      width="800"
-      height="600"
-      theme="vs-dark"
-      value={code}
+      path={path}
+      theme="one-dark"
+      defaultValue={code}
       options={options}
       onChange={onChange}
       editorDidMount={editorDidMount}
@@ -65,14 +91,27 @@ ReactDOM.render(
 );
 ```
 
-Add the [Monaco Webpack plugin](https://github.com/Microsoft/monaco-editor-webpack-plugin) `monaco-editor-webpack-plugin` to your `webpack.config.js`:
+Add the 'Worker Plugin' to your `craco.config.js`:
+'wasm' rule is need for proper tokenization support with Webpack 4...
 
 ```js
-const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin-updated');
+const WorkerPlugin = require('worker-plugin');
 module.exports = {
-  plugins: [
-    new MonacoWebpackPlugin()
-  ]
+    webpack: {
+        plugins: [
+            new WorkerPlugin()
+        ],
+        configure: {
+            module: {
+                rules: [
+                    {
+                        test: /\.wasm$/,
+                        type: "javascript/auto"
+                    }
+                ]
+            }
+        },
+    }
 };
 ```
 
